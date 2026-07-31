@@ -379,12 +379,31 @@ p { margin: 0 0 1em; color: var(--color-text-muted); }
 /* ==========================================================================
    Leistungsnavigator
    ========================================================================== */
-.services-grid {
+.services-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.services-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1px;
   background: var(--color-border);
   border: 1px solid var(--color-border);
+}
+.services-row--4 { grid-template-columns: repeat(4, 1fr); }
+.services-row--2 {
+  grid-template-columns: repeat(2, 1fr);
+  /* Box selbst nur so breit wie 2 Karten + 1 Gap (nicht 4 Spalten breit),
+     dadurch kein Hintergrund in den "leeren" Aussparungen der 4er-Reihe. */
+  width: calc(50% - 0.5px);
+  margin-inline: auto;
+}
+@media (max-width: 900px) {
+  .services-row--4 { grid-template-columns: repeat(2, 1fr); }
+  .services-row--2 { grid-template-columns: repeat(2, 1fr); width: 100%; }
+}
+@media (max-width: 560px) {
+  .services-row--4, .services-row--2 { grid-template-columns: 1fr; width: 100%; }
 }
 .service-card {
   background: var(--color-bg);
